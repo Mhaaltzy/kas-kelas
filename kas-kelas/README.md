@@ -40,7 +40,7 @@ git push -u origin main
 | --- | --- |
 | `SUPABASE_URL` | Project URL dari Supabase |
 | `SUPABASE_SERVICE_ROLE_KEY` | service_role key |
-| `SESSION_SECRET` | teks acak panjang, minimal 32 karakter |
+| `SESSION_SECRET` | k9#mP2$vL8@qR5!xZ7&wN4*bT1^yH6%j |
 | `BENDAHARA_NAMES` | `Gania,Cheryl` |
 
 3. Deploy
