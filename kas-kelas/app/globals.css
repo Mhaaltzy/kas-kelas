@@ -13,6 +13,7 @@
   --red-soft: rgba(255, 69, 58, 0.15);
   --blue: #0a84ff;
   --blue-soft: rgba(10, 132, 255, 0.14);
+  --solid: #f1f4ff;
   --bg1: #dfe9ff;
   --bg2: #f3e4ff;
   --bg3: #ffe9e3;
@@ -31,6 +32,7 @@
     --green-soft: rgba(48, 209, 88, 0.2);
     --red-soft: rgba(255, 69, 58, 0.2);
     --blue-soft: rgba(10, 132, 255, 0.25);
+    --solid: #1b2040;
     --bg1: #0b1030;
     --bg2: #1a0f33;
     --bg3: #101a2e;
@@ -156,9 +158,9 @@ body {
 .table-wrap { overflow: auto; max-height: 68vh; border-radius: 18px; border: 1px solid var(--stroke-soft); -webkit-overflow-scrolling: touch; }
 table.kas { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; font-size: 14px; }
 table.kas th, table.kas td { padding: 0; border-bottom: 1px solid var(--stroke-soft); white-space: nowrap; }
-table.kas thead th { position: sticky; top: 0; z-index: 3; background: var(--glass-strong); padding: 12px 12px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); text-align: center; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-table.kas td.c-absen, table.kas th.c-absen { position: sticky; left: 0; z-index: 2; width: 52px; min-width: 52px; text-align: center; background: var(--glass-strong); }
-table.kas td.c-nama, table.kas th.c-nama { position: sticky; left: 52px; z-index: 2; min-width: 250px; max-width: 250px; text-align: left; background: var(--glass-strong); box-shadow: 6px 0 12px -8px rgba(20, 30, 90, 0.25); }
+table.kas thead th { position: sticky; top: 0; z-index: 3; background: var(--solid); padding: 12px 12px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); text-align: center; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+table.kas td.c-absen, table.kas th.c-absen { position: sticky; left: 0; z-index: 2; width: 52px; min-width: 52px; text-align: center; background: var(--solid); }
+table.kas td.c-nama, table.kas th.c-nama { position: sticky; left: 52px; z-index: 2; min-width: 250px; max-width: 250px; text-align: left; background: var(--solid); box-shadow: 6px 0 12px -8px rgba(20, 30, 90, 0.25); }
 table.kas thead th.c-absen, table.kas thead th.c-nama { z-index: 4; }
 table.kas td.c-absen, table.kas td.c-nama { padding: 10px 12px; font-weight: 500; }
 table.kas td.c-nama { overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
@@ -178,10 +180,11 @@ input.nom { width: 100%; border: 0; outline: none; background: transparent; colo
 input.nom:focus { background: var(--glass-strong); box-shadow: inset 0 0 0 2px var(--blue); border-radius: 6px; }
 td.c-total { text-align: right; padding: 10px 16px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 120px; }
 th.c-total { min-width: 120px; }
-tfoot td { position: sticky; bottom: 0; background: var(--glass-strong); padding: 12px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+tfoot td { position: sticky; bottom: 0; background: var(--solid); padding: 12px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 tfoot td.lbl { text-align: left; left: 0; z-index: 2; }
 
 .hint { margin: 12px 4px 0; font-size: 12.5px; color: var(--muted); }
+.pin-btn { display: none; }
 
 /* Form transaksi */
 .tx-grid { display: grid; grid-template-columns: 420px 1fr; gap: 18px; align-items: start; }
@@ -238,7 +241,16 @@ tfoot td.lbl { text-align: left; left: 0; z-index: 2; }
   .shell { padding: 14px 10px 50px; }
   .panel { padding: 14px; }
   .stat .val { font-size: 18px; }
-  table.kas td.c-nama, table.kas th.c-nama { min-width: 170px; max-width: 170px; }
+  /* HP: kolom absen kecil dan nama ikut bergeser, jadi kolom bulan lega */
+  .pin-btn { display: inline-block; }
+  table.kas td.c-absen, table.kas th.c-absen { width: 38px; min-width: 38px; padding: 10px 4px; font-size: 13px; }
+  table.kas td.c-nama, table.kas th.c-nama { position: static; min-width: 190px; max-width: 190px; box-shadow: none; background: transparent; }
+  table.kas thead th.c-nama { position: sticky; top: 0; left: auto; background: var(--solid); }
+  tfoot td.lbl { position: static; }
+  /* Mode "Kunci nama": nama menempel di kiri tapi sempit dan boleh 2 baris */
+  .table-wrap.pin table.kas td.c-nama,
+  .table-wrap.pin table.kas thead th.c-nama { position: sticky; left: 38px; min-width: 120px; max-width: 120px; background: var(--solid); box-shadow: 6px 0 12px -8px rgba(20, 30, 90, 0.25); }
+  .table-wrap.pin table.kas td.c-nama { white-space: normal; word-break: break-word; font-size: 11px; line-height: 1.25; padding: 8px 8px; }
   .tx-item { flex-wrap: wrap; }
   .sheet-actions { grid-template-columns: 1fr; }
   .sheet-actions.two { grid-template-columns: 1fr 1fr; }
