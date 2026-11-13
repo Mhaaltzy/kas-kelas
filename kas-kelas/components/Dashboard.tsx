@@ -158,6 +158,7 @@ export default function Dashboard({ nama }: { nama: string }) {
   const [iuran, setIuran] = useState<Record<string, number>>({});
   const [tx, setTx] = useState<Tx[]>([]);
   const [tab, setTab] = useState<'iuran' | 'transaksi'>('iuran');
+  const [pinNama, setPinNama] = useState(false);
   const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
 
   const [draft, setDraft] = useState<Draft>(emptyDraft());
@@ -347,6 +348,9 @@ export default function Dashboard({ nama }: { nama: string }) {
         <section className="glass panel">
           <div className="panel-head">
             <h3>Iuran kas per siswa</h3>
+            <button type="button" className="btn small pin-btn" onClick={() => setPinNama((p) => !p)}>
+              {pinNama ? '📌 Nama dikunci' : '📌 Kunci nama'}
+            </button>
             <div className="spacer" />
             <div className="legend">
               <span><i style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--green)', display: 'inline-block' }} /> Lunas (minimal {rp(TARGET)})</span>
@@ -354,7 +358,7 @@ export default function Dashboard({ nama }: { nama: string }) {
             </div>
           </div>
 
-          <div className="table-wrap">
+          <div className={'table-wrap' + (pinNama ? ' pin' : '')}>
             <table className="kas">
               <thead>
                 <tr>
